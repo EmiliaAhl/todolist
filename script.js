@@ -2,7 +2,6 @@ const list = document.getElementById('lista')
 const input = document.getElementById('input')
 const submitButton = document.getElementById('submit')
 const resetButton = document.getElementById('reset')
-let tasksDoneArray = JSON.parse(localStorage.getItem('tasksDoneArray')) || []
 
 let toDoArray = JSON.parse(localStorage.getItem('toDoArray')) ||
  [
@@ -21,9 +20,7 @@ function renderList () {
     <li id=item` + i + `
         class="list-group-item d-flex justify-content-between">
         <div>
-          <input 
-                type="checkbox"
-                onclick='updateBackground("item` + i + `")'/>
+          <input type="checkbox"/>
           `+ listItem + `
         </div>
         <div>
@@ -45,7 +42,11 @@ function renderList () {
 function addItem () {
     const inputValue = input.value
 
-    toDoArray.push(inputValue)
+    if (inputValue === null || inputValue.trim() === "") {
+        return
+    };
+
+    toDoArray.push(inputValue )
 
     input.value = ''
 
